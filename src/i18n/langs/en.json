@@ -620,6 +620,7 @@
     "Security": "Security setting",
     "SecuritySetting": "Security setting",
     "SubscriptionID": "Subscription ID",
+    "Logging": "Logging",
     "Terminal": "Terminal setting",
     "all": "All",
     "authLdap": "Enable LDAP auth",
@@ -649,6 +650,13 @@
     "emailTest": "Test connection",
     "emailUserSSL": "Use SSL",
     "emailUserTLS": "Use TLS",
+    "logging": {
+      "Syslog": "Syslog",
+      "SyslogEnable": "Enable",
+      "SyslogAddr": "Address",
+      "SyslogFacility": "Facility",
+      "SyslogSockType": "Sock type"
+    },
     "helpText": {
       "ApiKeyList": "The API key is used to sign the request header. The header of each request is different. Please refer to the usage documentation",
       "authLdapSearchFilter": "Choice may be (cn|uid|sAMAccountName)=%(user)s)",
@@ -669,7 +677,9 @@
       "terminalHeartbeatInterval": "Units: seconds",
       "terminalSessionKeepDuration": "Units: days, Session, record, command will be delete if more than duration, only in database",
       "terminalTelnetRegex": "ex: Last\\\\s*login|success|\\u6210\\u529f",
-      "userGuideUrl": "User first login update profile done redirect to it"
+      "userGuideUrl": "User first login update profile done redirect to it",
+      "SyslogAddr": "eg: 172.16.8.8:514",
+      "LoggingInfo": "For performance, after save syslog setting, restart service"
     },
     "helpTip": {
       "emailUserSSL": "If SMTP port is 465, may be select",
