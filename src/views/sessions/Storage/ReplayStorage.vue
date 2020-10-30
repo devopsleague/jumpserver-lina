@@ -19,6 +19,14 @@ export default {
         hasCreate: false,
         moreActionsTitle: this.$t('common.Create'),
         moreActionsType: 'primary',
+        extraActions: [
+          {
+            name: 'serverStorage',
+            title: this.$t('sessions.serverStorageSetting'),
+            type: 'default',
+            can: true
+          }
+        ],
         extraMoreActions: [
           {
             name: 'S3',
