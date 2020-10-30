@@ -1,5 +1,6 @@
 <template>
   <div v-if="!loading">
+
     <IBox>
       <GenericCreateUpdateForm
         :fields="selectFields"
@@ -96,32 +97,49 @@ export default {
       dialogLdapUserImport: false,
       dialogLdapUserImportLoginStatus: false,
       initialData: {},
-      selectFields: [[this.$t('common.BasicInfo'), ['AUTH_LDAP_SERVER_URI', 'AUTH_LDAP_BIND_DN', 'AUTH_LDAP_BIND_PASSWORD', 'AUTH_LDAP_SEARCH_OU',
-        'AUTH_LDAP_SEARCH_FILTER', 'AUTH_LDAP_USER_ATTR_MAP', 'AUTH_LDAP']]],
+      selectFields: [
+        [
+          this.$t('common.BasicInfo'),
+          [
+            'AUTH_LDAP', 'AUTH_LDAP_SERVER_URI', 'AUTH_LDAP_BIND_DN',
+            'AUTH_LDAP_BIND_PASSWORD', 'AUTH_LDAP_SEARCH_OU',
+            'AUTH_LDAP_SEARCH_FILTER', 'AUTH_LDAP_USER_ATTR_MAP'
+          ]
+        ]
+      ],
       successUrl: { name: 'Settings', params: { activeMenu: 'Email' }},
       fieldsMeta: {
+        AUTH_LDAP: {
+          label: this.$t('setting.authLdap'),
+          type: 'checkbox'
+        },
         AUTH_LDAP_SERVER_URI: {
           label: this.$t('setting.authLdapServerUri'),
-          rules: [Required]
+          rules: [Required],
+          hidden: form => !form.AUTH_LDAP
         },
         AUTH_LDAP_BIND_DN: {
-          label: this.$t('setting.authLdapBindDn')
+          label: this.$t('setting.authLdapBindDn'),
+          hidden: form => !form.AUTH_LDAP
         },
         AUTH_LDAP_BIND_PASSWORD: {
           label: this.$t('setting.authLdapBindPassword'),
           type: 'input',
           el: {
             type: 'password'
-          }
+          },
+          hidden: form => !form.AUTH_LDAP
         },
         AUTH_LDAP_SEARCH_OU: {
           label: this.$t('setting.authLdapSearchOu'),
-          helpText: this.$t('setting.helpText.authLdapSearchOu')
+          helpText: this.$t('setting.helpText.authLdapSearchOu'),
+          hidden: form => !form.AUTH_LDAP
         },
         AUTH_LDAP_SEARCH_FILTER: {
           label: this.$t('setting.authLdapSearchFilter'),
           rules: [Required],
-          helpText: this.$t('setting.helpText.authLdapSearchFilter')
+          helpText: this.$t('setting.helpText.authLdapSearchFilter'),
+          hidden: form => !form.AUTH_LDAP
         },
         AUTH_LDAP_USER_ATTR_MAP: {
           label: this.$t('setting.authLdapUserAttrMap'),
@@ -129,11 +147,8 @@ export default {
             type: 'textarea'
           },
           rules: [Required],
-          helpText: this.$t('setting.helpText.authLdapUserAttrMap')
-        },
-        AUTH_LDAP: {
-          label: this.$t('setting.authLdap'),
-          type: 'checkbox'
+          helpText: this.$t('setting.helpText.authLdapUserAttrMap'),
+          hidden: form => !form.AUTH_LDAP
         }
       },
       url: '/api/v1/settings/setting/',
@@ -188,7 +203,6 @@ export default {
             label: this.$t('users.Existing'),
             width: '120px'
           }
-
         }
       },
       headerActions: {

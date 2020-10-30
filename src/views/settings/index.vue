@@ -19,6 +19,7 @@ import Ldap from './Ldap'
 import Terminal from './Terminal'
 import Security from './Security'
 import License from './License'
+import Logging from './Logging'
 import { getSettings } from '@/api/settings'
 export default {
   components: {
@@ -31,6 +32,7 @@ export default {
     Ldap,
     Terminal,
     Security,
+    Logging,
     License
   },
   data() {
@@ -64,6 +66,10 @@ export default {
           name: 'Security'
         },
         {
+          title: this.$t('setting.Logging'),
+          name: 'Logging'
+        },
+        {
           title: this.$t('setting.License'),
           name: 'License'
         }
@@ -74,26 +80,97 @@ export default {
     Title() {
       return this.$t('settings.setting')
     },
+    basicData() {
+      const basic = this.settingsData.basic
+      if (basic.SITE_URL === null) {
+        basic.SITE_URL = ''
+      }
+      if (basic.EMAIL_SUBJECT_PREFIX === null) {
+        basic.EMAIL_SUBJECT_PREFIX = ''
+      }
+      if (basic.USER_GUIDE_URL === null) {
+        basic.USER_GUIDE_URL = ''
+      }
+      return basic
+    },
+    emailData() {
+      const email = this.settingsData.email
+      if (email.EMAIL_FROM === null) {
+        email.EMAIL_FROM = ''
+      }
+      if (email.EMAIL_RECIPIENT === null) {
+        email.EMAIL_RECIPIENT = ''
+      }
+      if (email.EMAIL_USE_TLS === null) {
+        email.EMAIL_USE_TLS = false
+      }
+      if (email.EMAIL_HOST === null) {
+        email.EMAIL_HOST = ''
+      }
+      if (email.EMAIL_HOST_USER === null) {
+        email.EMAIL_HOST_USER = ''
+      }
+      if (email.EMAIL_PORT === null) {
+        email.EMAIL_PORT = ''
+      }
+      if (email.EMAIL_USE_SSL === null) {
+        email.EMAIL_USE_SSL = false
+      }
+      return email
+    },
+    emailContentData() {
+      const email_content = this.settingsData.email_content
+      if (email_content.EMAIL_CUSTOM_USER_CREATED_BODY === null) {
+        email_content.EMAIL_CUSTOM_USER_CREATED_BODY = ''
+      }
+      if (email_content.EMAIL_CUSTOM_USER_CREATED_HONORIFIC === null) {
+        email_content.EMAIL_CUSTOM_USER_CREATED_HONORIFIC = ''
+      }
+      if (email_content.EMAIL_CUSTOM_USER_CREATED_SIGNATURE === null) {
+        email_content.EMAIL_CUSTOM_USER_CREATED_SIGNATURE = ''
+      }
+      if (email_content.EMAIL_CUSTOM_USER_CREATED_SUBJECT === null) {
+        email_content.EMAIL_CUSTOM_USER_CREATED_SUBJECT = ''
+      }
+      return email_content
+    },
+    ldapData() {
+      return this.settingsData.ldap
+    },
+    terminalData() {
+      return this.settingsData.terminal
+    },
+    securityData() {
+      const security = this.settingsData.security
+      if (security.SECURITY_COMMAND_EXECUTION === null) {
+        security.SECURITY_COMMAND_EXECUTION = false
+      }
+      return security
+    },
+    loggingData() {
+      return this.settingsData.logging
+    },
     componentData() {
       switch (this.activeMenu) {
         case 'Basic':
-          return this.basicData(this.settingsData)
+          return this.basicData
         case 'Email':
-          return this.emailData(this.settingsData)
+          return this.emailData
         case 'EmailContent':
-          return this.emailContentData(this.settingsData)
+          return this.emailContentData
         case 'Ldap':
-          return this.ldapData(this.settingsData)
+          return this.ldapData
         case 'Terminal':
-          return this.terminalData(this.settingsData)
+          return this.terminalData
         case 'Security':
-          return this.securityData(this.settingsData)
+          return this.securityData
+        case 'Logging':
+          return this.loggingData
         case 'License':
           return {}
       }
       return this.basicData(this.settingsData)
     }
-
   },
   mounted() {
     getSettings().then(data => {
@@ -128,73 +205,6 @@ export default {
           this.activeMenu = 'License'
           break
       }
-    },
-    basicData(data) {
-      const basic = data.basic
-      if (basic.SITE_URL === null) {
-        basic.SITE_URL = ''
-      }
-      if (basic.EMAIL_SUBJECT_PREFIX === null) {
-        basic.EMAIL_SUBJECT_PREFIX = ''
-      }
-      if (basic.USER_GUIDE_URL === null) {
-        basic.USER_GUIDE_URL = ''
-      }
-      return basic
-    },
-    emailData(data) {
-      const email = data.email
-      if (email.EMAIL_FROM === null) {
-        email.EMAIL_FROM = ''
-      }
-      if (email.EMAIL_RECIPIENT === null) {
-        email.EMAIL_RECIPIENT = ''
-      }
-      if (email.EMAIL_USE_TLS === null) {
-        email.EMAIL_USE_TLS = false
-      }
-      if (email.EMAIL_HOST === null) {
-        email.EMAIL_HOST = ''
-      }
-      if (email.EMAIL_HOST_USER === null) {
-        email.EMAIL_HOST_USER = ''
-      }
-      if (email.EMAIL_PORT === null) {
-        email.EMAIL_PORT = ''
-      }
-      if (email.EMAIL_USE_SSL === null) {
-        email.EMAIL_USE_SSL = false
-      }
-      return email
-    },
-    emailContentData(data) {
-      const email_content = data.email_content
-      if (email_content.EMAIL_CUSTOM_USER_CREATED_BODY === null) {
-        email_content.EMAIL_CUSTOM_USER_CREATED_BODY = ''
-      }
-      if (email_content.EMAIL_CUSTOM_USER_CREATED_HONORIFIC === null) {
-        email_content.EMAIL_CUSTOM_USER_CREATED_HONORIFIC = ''
-      }
-      if (email_content.EMAIL_CUSTOM_USER_CREATED_SIGNATURE === null) {
-        email_content.EMAIL_CUSTOM_USER_CREATED_SIGNATURE = ''
-      }
-      if (email_content.EMAIL_CUSTOM_USER_CREATED_SUBJECT === null) {
-        email_content.EMAIL_CUSTOM_USER_CREATED_SUBJECT = ''
-      }
-      return email_content
-    },
-    ldapData(data) {
-      return data.ldap
-    },
-    terminalData(data) {
-      return data.terminal
-    },
-    securityData(data) {
-      const security = data.security
-      if (security.SECURITY_COMMAND_EXECUTION === null) {
-        security.SECURITY_COMMAND_EXECUTION = false
-      }
-      return security
     }
   }
 }
