@@ -20,6 +20,7 @@ import Terminal from './Terminal'
 import Security from './Security'
 import License from './License'
 import Logging from './Logging'
+import Replay from './Replay'
 import { getSettings } from '@/api/settings'
 export default {
   components: {
@@ -33,6 +34,7 @@ export default {
     Terminal,
     Security,
     Logging,
+    Replay,
     License
   },
   data() {
@@ -68,6 +70,10 @@ export default {
         {
           title: this.$t('setting.Logging'),
           name: 'Logging'
+        },
+        {
+          title: this.$t('setting.Replay'),
+          name: 'Replay'
         },
         {
           title: this.$t('setting.License'),
@@ -150,6 +156,13 @@ export default {
     loggingData() {
       return this.settingsData.logging
     },
+    replayData() {
+      const data = this.settingsData.replay.SERVER_REPLAY_STORAGE
+      if (data['HOST']) {
+        data['REPLAY_ENABLE'] = true
+      }
+      return data
+    },
     componentData() {
       switch (this.activeMenu) {
         case 'Basic':
@@ -166,6 +179,8 @@ export default {
           return this.securityData
         case 'Logging':
           return this.loggingData
+        case 'Replay':
+          return this.replayData
         case 'License':
           return {}
       }
@@ -200,6 +215,12 @@ export default {
           break
         case 'Security':
           this.activeMenu = 'Security'
+          break
+        case 'Logging':
+          this.activeMenu = 'Logging'
+          break
+        case 'Replay':
+          this.activeMenu = 'Replay'
           break
         case 'License':
           this.activeMenu = 'License'

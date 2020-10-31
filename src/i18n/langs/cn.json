@@ -659,12 +659,24 @@
     "SecurityInsecureCommand": "危险命令告警",
     "Insecure_Command_Alert": "危险命令告警",
     "SecurityInsecureCommandEmailReceiver": "告警接收邮件",
+    "Replay": "默认录像存储",
     "logging": {
       "Syslog": "远程日志",
       "SyslogEnable": "启用远程日志",
       "SyslogAddr": "地址",
       "SyslogFacility": "设施",
       "SyslogSockType": "连接类型"
+    },
+    "replay": {
+      "Local": "本地目录",
+      "Storage": "存储",
+      "Type": "类型",
+      "Host": "地址",
+      "Port": "端口",
+      "Username": "用户名",
+      "Password": "密码",
+      "Pasv": "被动模式",
+      "Dir": "目录"
     },
     "helpText": {
       "ApiKeyList": "使用api key签名请求头，每个请求的头部是不一样的, 请查阅使用文档",
@@ -689,7 +701,8 @@
       "userGuideUrl": "用户第一次登录，修改profile后重定向到地址",
       "SecurityInsecureCommandEmailReceiver": "多个邮箱时，以半角逗号','分隔",
       "SyslogAddr": "如: 172.16.8.8:514",
-      "LoggingInfo": "因为性能原因，设置远程日志后，需要重启服务"
+      "LoggingInfo": "因为性能原因，设置远程日志后，需要重启服务",
+      "FTPAddr": "如: 172.16.8.8"
     },
     "helpTip": {
       "emailUserSSL": "如果SMTP端口是465，通常需要启用SSL",
