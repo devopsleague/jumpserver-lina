@@ -701,7 +701,7 @@
       "userGuideUrl": "用户第一次登录，修改profile后重定向到地址",
       "SecurityInsecureCommandEmailReceiver": "多个邮箱时，以半角逗号','分隔",
       "SyslogAddr": "如: 172.16.8.8:514",
-      "LoggingInfo": "因为性能原因，设置远程日志后，需要重启服务",
+      "RestartInfo": "因为性能原因，修改该配置后，需要重启服务",
       "FTPAddr": "如: 172.16.8.8"
     },
     "helpTip": {

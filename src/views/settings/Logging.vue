@@ -76,7 +76,7 @@ export default {
         }
       },
       url: '/api/v1/settings/setting/',
-      pageInfo: this.$t('setting.helpText.LoggingInfo')
+      pageInfo: this.$t('setting.helpText.RestartInfo')
     }
   },
   methods: {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-alert :title="pageInfo" type="info" show-icon />
     <IBox>
       <GenericCreateUpdateForm
         :fields="selectFields"
@@ -96,7 +97,8 @@ export default {
           }
         }
       },
-      url: '/api/v1/settings/setting/'
+      url: '/api/v1/settings/setting/',
+      pageInfo: this.$t('setting.helpText.RestartInfo')
     }
   },
   methods: {
