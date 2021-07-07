@@ -131,7 +131,7 @@ const actions = {
         return resolve(state.roles)
       }
       dispatch('getProfile').then(profile => {
-        const { admin_or_audit_orgs: inOrgs } = profile
+        const { belongs_orgs: inOrgs } = profile
         commit('SET_ORGS', inOrgs)
         resolve(inOrgs)
       }).catch((e) => reject(e))

@@ -51,16 +51,17 @@ export function getRolesDisplay(roles) {
 }
 
 export function parseUserRoles(currentOrgRoles, clusterRole) {
-  if (clusterRole === 'Admin') {
-    return [SUPER_ADMIN, USER]
-  }
-  if (currentOrgRoles.includes('Admin')) {
-    return [ORG_ADMIN, USER]
-  }
-  if (clusterRole === 'Auditor' || currentOrgRoles.includes('Auditor')) {
-    return [ORG_AUDITOR]
-  }
-  return [USER]
+  return [SUPER_ADMIN, USER]
+  // if (clusterRole === 'Admin') {
+  //   return [SUPER_ADMIN, USER]
+  // }
+  // if (currentOrgRoles.includes('Admin')) {
+  //   return [ORG_ADMIN, USER]
+  // }
+  // if (clusterRole === 'Auditor' || currentOrgRoles.includes('Auditor')) {
+  //   return [ORG_AUDITOR]
+  // }
+  // return [USER]
 }
 
 export function getUserInAdminPagePerm(userPerm) {
